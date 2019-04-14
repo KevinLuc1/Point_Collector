@@ -28,6 +28,10 @@
 		<div id="number">
 			<h2>Your Number to Guess: <span id="number-to-guess"></span></h2>
 		</div>
+		
+		<div id="scoreBoard">
+			<h2>Your Score is: <span id="score">0</span>
+		</div>
 
 		<div id="wins-losses">
 			<p>Wins: <span id="winCount">0</span> </p>
@@ -41,9 +45,16 @@
 			<img id="photoFour" src="assets/images/purplegem.jpg" alt="purple crystal">
 		</div>
 
-		<div id="scoreBoard">
-			<h2>Your Score is: <span id="score">0</span>
+		<div id="buttons">
+			<h4>Click a button to change pictures</h4>
+			<button data-animal="cat">cat</button>
+  			<button data-animal="dog">dogs</button>
+  			<button data-animal="bird">birds</button>
+  			<button data-animal="fruits">fruits</button>
+  			<button data-animal="trees">trees</button>
+  			<button data-animal="fish">fish</button>
 		</div>
+
 
 		<script type="text/javascript">
 			
@@ -75,6 +86,46 @@
 				counter += numberOptionFour;
 				outcomes();
 			})
+
+
+			
+		$("button").on("click", function() {
+		      // Grabbing and storing the data-animal property value from the button
+		      var animal = $(this).attr("data-animal");
+
+		      // Constructing a queryURL using the animal name
+		      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+		        animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+		      // Performing an AJAX request with the queryURL
+		      $.ajax({
+		          url: queryURL,
+		          method: "GET"
+		        })
+		        // After data comes back from the request
+		        .done(function(response) {
+		          console.log(queryURL);
+
+		          console.log(response);
+		          // storing the data from the AJAX request in the results variable
+		          var results = response.data;
+
+		          // replacing current images with an API search image
+		          $("#photoOne").attr("src", results[0].images.fixed_height.url)
+		          $("#photoTwo").attr("src", results[1].images.fixed_height.url)
+		          $("#photoThree").attr("src", results[2].images.fixed_height.url)
+		          $("#photoFour").attr("src", results[3].images.fixed_height.url)
+		        });
+		    });
+
+		  
+
+
+
+
+
+
+
 
 
 
