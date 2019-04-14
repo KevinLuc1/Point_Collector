@@ -1,5 +1,5 @@
 body {
-	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHIF7ycIAuo-YscUQ3iPeFdYVvSJVom-BTTeHfdBjfvphlnlfuEw)
+	background-image: url("../images/background.jpg")
 }	
 
 #header, #instructions, #number, #wins-losses, 
