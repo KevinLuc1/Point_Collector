@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crystals Collector</title>
+
+    <!-- jQuery Link -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Game Logic -->
+    <!-- <script type="text/javascript" src="assets/javascript/logic.js"></script> -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+  </head>
+	<body>
+		<div id="header">
+			<h1>Crystals Collector!</h1>
+		</div>
+
+		<div id="instructions">
+			<p>You will be given a random number at the start of the game.</p>
+			<p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score</p>
+			<p>You win the game by matching your total score to the random number to guess, you lose if your total score goes above the random number to guess</p>
+			<p>The value of each crystal is hidden from you until you click on it</p>
+			<p>Each time when the game starts, the game will change the values of each crystal</p>
+		</div>
+
+		<div id="number">
+			<h2>Your Number to Guess: <span id="number-to-guess"></span></h2>
+		</div>
+
+		<div id="wins-losses">
+			<p>Wins: <span id="winCount"></span> </p>
+			<p>Losses: <span id="lossCount"></span></p>
+		</div>
+
+		<div id="four_photos">
+			<img id="photoOne" src="assets/images/bluegem.jpg" alt="blue crystal">
+			<img id="photoTwo" src="assets/images/redgem.jpg" alt="red crystal">
+			<img id="photoThree" src="assets/images/cyangem.png" alt="cyan crystal">
+			<img id="photoFour" src="assets/images/purplegem.jpg" alt="purple crystal">
+		</div>
+
+		<div id="scoreBoard">
+			<h2>Your Score is: <span id="score"></span>
+		</div>
+
+		<script type="text/javascript">
+			
+			var targetNumber = randomTarget();
+			var counter = 0;
+			var winCounter = 0;
+			var lossCounter = 0
+			var numberOptionOne = randomNum();
+			var numberOptionTwo = randomNum();
+			var numberOptionThree = randomNum();
+			var numberOptionFour = randomNum();
+
+			$("#number-to-guess").html(targetNumber);
+
+
+			$("#photoOne").on("click", function () {
+				counter += numberOptionOne;
+				$("#score").html(counter);
+				// alert("Your score is " + counter );
+				if (counter === targetNumber) {
+					alert("Winner!");
+					winCounter +=1;
+					counter = 0;			
+					targetNumber = randomTarget();
+					$("#number-to-guess").html(targetNumber);
+					numberOptionRed = Math.floor(Math.random() * 11) + 1;
+					numberOptionBlue = Math.floor(Math.random() * 11) + 1;
+					numberOptionCyan = Math.floor(Math.random() * 11) + 1;
+					numberOptionPurple = Math.floor(Math.random() * 11) + 1;
+					counter = 0;
+					$("#winCount").html(winCounter);
+				}
+				else if (counter >= targetNumber) {
+					alert("You Lost!")
+					lossCounter +=1;
+					targetNumber = Math.floor(Math.random() * 102) + 19;
+					$("#number-to-guess").html(targetNumber);
+					numberOptionRed = Math.floor(Math.random() * 11) + 1;
+					numberOptionBlue = Math.floor(Math.random() * 11) + 1;
+					numberOptionCyan = Math.floor(Math.random() * 11) + 1;
+					numberOptionPurple = Math.floor(Math.random() * 11) + 1;
+					counter = 0;
+					$("#lossCount").html(lossCounter);
+				}
+			})
+
+
+			function resetPictureNums(){
+				numberOptionOne = randomNum();
+				numberOptionTwo = randomNum();
+				numberOptionThree = randomNum();
+				numberOptionFour = randomNum();
+			}
+
+
+
+
+			//create a random number between 1 and 12
+			function randomNum() {
+				return Math.floor(Math.random() * 11) + 1;
+			}
+
+			// random target between 19 and 120
+			function randomTarget() {
+				return Math.floor(Math.random() * 102) + 19;
+			}
+
+
+
+		</script>
+
+	
+	</body>
+</html>

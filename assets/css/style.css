@@ -1,0 +1,28 @@
+body {
+	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHIF7ycIAuo-YscUQ3iPeFdYVvSJVom-BTTeHfdBjfvphlnlfuEw)
+}	
+
+#header, #instructions, #number, #wins-losses, #four_photos, #scoreBoard{
+	text-align: center;
+	/*background-color: #D3D3D3;*/
+	width: 70%;
+	margin-left: 15%;
+
+
+/*#instructions {
+	text-align: center;
+}
+
+#number {
+	text-align: center;
+}
+
+#wins-losses {
+	text-align: center;
+}
+
+#crystals {
+	text-align: center;
+}
+
+*/
