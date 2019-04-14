@@ -30,8 +30,8 @@
 		</div>
 
 		<div id="wins-losses">
-			<p>Wins: <span id="winCount"></span> </p>
-			<p>Losses: <span id="lossCount"></span></p>
+			<p>Wins: <span id="winCount">0</span> </p>
+			<p>Losses: <span id="lossCount">0</span></p>
 		</div>
 
 		<div id="four_photos">
@@ -42,7 +42,7 @@
 		</div>
 
 		<div id="scoreBoard">
-			<h2>Your Score is: <span id="score"></span>
+			<h2>Your Score is: <span id="score">0</span>
 		</div>
 
 		<script type="text/javascript">
@@ -61,44 +61,67 @@
 
 			$("#photoOne").on("click", function () {
 				counter += numberOptionOne;
-				$("#score").html(counter);
-				// alert("Your score is " + counter );
-				if (counter === targetNumber) {
-					alert("Winner!");
-					winCounter +=1;
-					counter = 0;			
-					targetNumber = randomTarget();
-					$("#number-to-guess").html(targetNumber);
-					numberOptionRed = Math.floor(Math.random() * 11) + 1;
-					numberOptionBlue = Math.floor(Math.random() * 11) + 1;
-					numberOptionCyan = Math.floor(Math.random() * 11) + 1;
-					numberOptionPurple = Math.floor(Math.random() * 11) + 1;
-					counter = 0;
-					$("#winCount").html(winCounter);
-				}
-				else if (counter >= targetNumber) {
-					alert("You Lost!")
-					lossCounter +=1;
-					targetNumber = Math.floor(Math.random() * 102) + 19;
-					$("#number-to-guess").html(targetNumber);
-					numberOptionRed = Math.floor(Math.random() * 11) + 1;
-					numberOptionBlue = Math.floor(Math.random() * 11) + 1;
-					numberOptionCyan = Math.floor(Math.random() * 11) + 1;
-					numberOptionPurple = Math.floor(Math.random() * 11) + 1;
-					counter = 0;
-					$("#lossCount").html(lossCounter);
-				}
+				outcomes();
+			})
+			$("#photoTwo").on("click", function () {
+				counter += numberOptionTwo;
+				outcomes();
+			})
+			$("#photoThree").on("click", function () {
+				counter += numberOptionThree;
+				outcomes();
+			})
+			$("#photoFour").on("click", function () {
+				counter += numberOptionFour;
+				outcomes();
 			})
 
 
-			function resetPictureNums(){
+
+
+			function outcomes() {
+				$("#score").html(counter);
+				if (counter === targetNumber) {
+					resetGameWon();
+				}
+				else if (counter >= targetNumber) {
+					resetGameLost();
+				}
+			}
+
+
+
+			function resetGameLost(){
+
+				alert("You Lost!")
+				lossCounter +=1;
+				targetNumber = randomTarget();
+				$("#number-to-guess").html(targetNumber);
 				numberOptionOne = randomNum();
 				numberOptionTwo = randomNum();
 				numberOptionThree = randomNum();
 				numberOptionFour = randomNum();
+				counter = 0;
+				$("#lossCount").html(lossCounter);	
+				$("#score").html("0");	
+
 			}
 
+			function resetGameWon(){
 
+				alert("You Won!")
+				winCounter +=1;
+				targetNumber = randomTarget();
+				$("#number-to-guess").html(targetNumber);
+				numberOptionOne = randomNum();
+				numberOptionTwo = randomNum();
+				numberOptionThree = randomNum();
+				numberOptionFour = randomNum();
+				counter = 0;
+				$("#winCount").html(winCounter);	
+				$("#score").html("0");		
+
+			}
 
 
 			//create a random number between 1 and 12
